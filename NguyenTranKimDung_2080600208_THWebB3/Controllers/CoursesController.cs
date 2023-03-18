@@ -18,19 +18,35 @@ namespace NguyenTranKimDung_2080600208_THWebB3.Controllers
         }
         // GET: Courses
         [Authorize]
+        
+        public ActionResult Create()
+        {
+            var viewModel = new CourseViewModel
+            {
+                Categories = _dbContext.Categories.ToList(),
+            };
+            return View(viewModel);
+        }
+        [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(CourseViewModel viewModel)
         {
-            var course = new Course
+            if(!ModelState.IsValid)
             {
-                LecturerID= User.Identity.GetUserId(),
-                DateTime= viewModel.GetDateTime(),
-                CategoryID= viewModel.Category,
-                Place= viewModel.Place,
-            };
-            _dbContext.Courses.Add(course);
-            _dbContext.SaveChanges();
-            return RedirectToAction("Index","Home");
+                viewModel.Categories= _dbContext.Categories.ToList();
+                return View("Create",viewModel);
+            }
+                var course= new Course
+                {
+                    LecturerID= User.Identity.GetUserId(),
+                    DateTime= viewModel.GetDateTime(),
+                    CategoryID= viewModel.Category,
+                    Place= viewModel.Place
+                };
+                _dbContext.Courses.Add(course);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index","Home");
         }
     }
 }

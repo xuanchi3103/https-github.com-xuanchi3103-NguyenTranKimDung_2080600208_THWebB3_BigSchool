@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace NguyenTranKimDung_2080600208_THWebB3
+namespace _2080600208_NTKD_THWed_BigSchool
 {
     public class BundleConfig
     {
@@ -20,7 +20,10 @@ namespace NguyenTranKimDung_2080600208_THWebB3
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js",
+                      "~/Scripts/bootbox.min.js"));
+
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

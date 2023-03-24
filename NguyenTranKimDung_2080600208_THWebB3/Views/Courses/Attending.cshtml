@@ -1,8 +1,10 @@
 ﻿@model NguyenTranKimDung_2080600208_THWebB3.ViewModels.CourseViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Attending</h2>
 <div class="row">
     <ul class=" course">
         @foreach (var course in Model.UpcommingCourses)

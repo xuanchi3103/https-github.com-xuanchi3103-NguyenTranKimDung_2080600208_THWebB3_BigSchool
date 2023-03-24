@@ -1,10 +1,11 @@
-﻿using NguyenTranKimDung_2080600208_THWebB3.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using NguyenTranKimDung_2080600208_THWebB3.Models;
+using NguyenTranKimDung_2080600208_THWebB3.ViewModels;
 
 namespace NguyenTranKimDung_2080600208_THWebB3.Controllers
 {
@@ -17,8 +18,17 @@ namespace NguyenTranKimDung_2080600208_THWebB3.Controllers
         }
         public ActionResult Index()
         {
-            var upcomingCourses = _dbContext.Courses.Include(c => c.Lecturer).Include(c => c.Category).Where(c => c.DateTime > DateTime.Now);
-            return View(upcomingCourses);
+            var upcommingCourses = _dbContext.Courses
+                .Include(c => c.Lecturer)
+                .Include(c => c.Category)
+                .Where(c => c.DateTime > DateTime.Now);
+            var viewModel = new CourseViewModel
+            {
+                UpcommingCourses = upcommingCourses,
+                ShowAction = User.Identity.IsAuthenticated
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult About()

@@ -8,7 +8,7 @@ namespace NguyenTranKimDung_2080600208_THWebB3.Models
 {
     public class Category
     {
-        public byte ID { get; set; }
+        public byte Id { get; set; }
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
